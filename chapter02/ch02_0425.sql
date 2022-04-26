@@ -1,6 +1,6 @@
--- p.49 евюл╨М ╩Щ╪╨
--- дУ╦╝╦╕ юш╪╨ гя хд, F5 ╫ггЮ
--- SQL Developer (x), VS code | PyCharm | юле╛╦Ё╫╨ ©╛╣©
+-- p.49 М┘▄Л²╢К╦■ Л┐²Л└╠
+-- Л©╪К╕╛К╔╪ Л·▒Л└╠ М∙° М⌡└, F5 Л▀╓М√┴
+-- SQL Developer (x), VS code | PyCharm | Л²╢М│╢К╕╫Л┼╓ Л≈╟К▐≥
 CREATE TABLE ex2_1 (
     COLUMN1 CHAR(10)
     , COLUMN2 VARCHAR2(10)
@@ -8,10 +8,10 @@ CREATE TABLE ex2_1 (
     , COLUMN4 NUMBER
 );
 
--- ╣╔юлем цъ╟║
+-- К█╟Л²╢М└╟ Л╤■Й╟─
 INSERT INTO ex2_1 (COLUMN1, COLUMN2) VALUES('abc', 'abc');
 
--- ╣╔юлем х╝юн
+-- К█╟Л²╢М└╟ М≥∙Л²╦
 SELECT
     COLUMN1
     , LENGTH(COLUMN1) as len1
@@ -19,17 +19,17 @@ SELECT
     , LENGTH(COLUMN2) as len2
 FROM ex2_1;
 
--- евюл╨М ╩Щ╪╨
+-- М┘▄Л²╢К╦■ Л┐²Л└╠
 CREATE TABLE ex2_2(
     COLUMN1 VARCHAR2(3)
     , COLUMN2 VARCHAR2(3 byte)
     , COLUMN3 VARCHAR2(3 char)
 );
 
--- ╣╔юлем цъ╟║
+-- К█╟Л²╢М└╟ Л╤■Й╟─
 INSERT INTO ex2_2 VALUES('abc', 'abc', 'abc');
 
--- ╣╔юлем х╝юн
+-- К█╟Л²╢М└╟ М≥∙Л²╦
 SELECT COLUMN1
     , LENGTH(COLUMN1) AS len1
     , COLUMN2
@@ -38,20 +38,20 @@ SELECT COLUMN1
     , LENGTH(COLUMN3) AS len3
 FROM ex2_2;
 
--- гя╠ш ╣╔юлем ╩Пют
--- ©║╥╞ ╧ъ╩Щ
-INSERT INTO ex2_2 VALUES ('х╚╠Ф╣©', 'х╚╠Ф╣©', 'х╚╠Ф╣©');
+-- М∙°Й╦─ К█╟Л²╢М└╟ Л┌╫Л·┘
+-- Л≈░К÷╛ К╟°Л┐²
+INSERT INTO ex2_2 VALUES ('М≥█Й╦╦К▐≥', 'М≥█Й╦╦К▐≥', 'М≥█Й╦╦К▐≥');
 
--- Column3©║╦╦ ╣╔юлем цъ╟║
-INSERT INTO ex2_2 (COLUMN3) VALUES ('х╚╠Ф╣©');
+-- Column3Л≈░К╖▄ К█╟Л²╢М└╟ Л╤■Й╟─
+INSERT INTO ex2_2 (COLUMN3) VALUES ('М≥█Й╦╦К▐≥');
 
--- ╣╔юлем а╤х╦
+-- К█╟Л²╢М└╟ Л║╟М ▄
 SELECT COLUMN3
     , LENGTH(COLUMN3) AS len3
     , LENGTHB(COLUMN3) AS bytelen
 FROM ex2_2;
 
--- ╪Щюз ╣╔юлем ╩Пют
+-- Л┬╚Л·░ К█╟Л²╢М└╟ Л┌╫Л·┘
 CREATE TABLE ex2_3 (
     COL_INT INTEGER
     , COL_DEC DECIMAL
@@ -76,12 +76,12 @@ CREATE TABLE ex2_4 (
 
 INSERT INTO ex2_4 (col_flot1, col_flot2) VALUES (1234567891234, 1234567891234);
 
--- а╤х╦
+-- Л║╟М ▄
 SELECT * FROM ex2_4;
 
 
 -- p.58
--- Ё╞б╔ ╣╔юлем е╦ют
+-- К┌═Л╖° К█╟Л²╢М└╟ М┐─Л·┘
 CREATE TABLE ex2_5(
     COL_DATE DATE
     , COL_TIMESTAMP TIMESTAMP
@@ -93,6 +93,6 @@ SELECT *
     FROM ex2_5;
 
 
--- LOB ╣╔юлем е╦ют
--- Large Objectюг ╬Ююз╥н ╢К©К╥╝ ╣╔юлем╦╕ юЗюЕгр ╪Ж юж╢б ╣╔юлем е╦ют
--- ╨Яа╓гЭ ╣╔юлем╢б ╠в е╘╠Б╟║ ╦е©Л е╚╣╔, юл╥╠ ╣╔юлем╦╕ юЗюЕгя╢ы
+-- LOB К█╟Л²╢М└╟ М┐─Л·┘
+-- Large ObjectЛ²≤ Л∙╫Л·░К║° К▄─Л ╘К÷┴ К█╟Л²╢М└╟К╔╪ Л═─Л·╔М∙═ Л┬≤ Л·┬К┼■ К█╟Л²╢М└╟ М┐─Л·┘
+-- К╧└Л═∙М≤∙ К█╟Л²╢М└╟К┼■ Й╥╦ М│╛Й╦╟Й╟─ К╖╓Л ╟ М│╟К█╟, Л²╢К÷╟ К█╟Л²╢М└╟К╔╪ Л═─Л·╔М∙°К▀╓
