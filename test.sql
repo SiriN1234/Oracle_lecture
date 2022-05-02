@@ -10,8 +10,10 @@ SELECT *
 FROM POPULATIONS
 WHERE year = 2015
   AND life_expectancy > (SELECT AVG(life_expectancy)
-                         FROM populations);
-                         
+                         FROM populations
+                         WHERE year = 2015);
+
+
 
 -- 2번
 SELECT
@@ -22,6 +24,13 @@ FROM
     cities a
     , subcon b
 WHERE a.name = b.capital
+ORDER BY urbanarea_pop DESC;
+
+SELECT name, country_code, urbanarea_pop
+  FROM cities
+WHERE name IN
+  (SELECT capital
+   FROM subcon)
 ORDER BY urbanarea_pop DESC;
 
 
@@ -62,6 +71,24 @@ FROM
 WHERE a.inf = b.inflation_rate
   AND b.code = c.code
 ORDER BY inf;
+
+
+SELECT sc.country_name, sc.continent, ec.inflation_rate
+  FROM subcon sc
+	INNER JOIN economies ec
+	ON sc.code = ec.code
+  WHERE year = 2015
+    AND inflation_rate IN (
+        SELECT MAX(inflation_rate) AS max_inf
+        FROM (
+             SELECT sc.country_name, sc.continent, ec.inflation_rate
+             FROM subcon sc
+             INNER JOIN economies ec
+             -- Using(code) 대신 ON 쿼리를 작성합니다.
+             ON sc.code = ec.code
+             WHERE year = 2015)
+        GROUP BY continent);
+
 
 
 -- window
