@@ -27,21 +27,17 @@ ORDER BY urbanarea_pop DESC;
 
 -- 3번
 SELECT
-    a.code
-    , a.inflation_rate
-    , a.unemployment_rate
-    , b.gov_form
+    code
+    , inflation_rate
+    , unemployment_rate
 FROM
-    economies a
-    , (SELECT 
-            gov_form
-            , code
-       FROM subcon
-       WHERE gov_form NOT LIKE 'Constitutional Monarchy%'
-         AND gov_form NOT LIKE '%Republic%'
-         AND gov_form NOT LIKE '%Monarchy') b
-WHERE a.code = b.code
-ORDER BY a.inflation_rate;
+    economies
+WHERE year = 2015
+  AND code NOT IN (SELECT code
+                   FROM subcon
+                   WHERE (gov_form = 'Constitutional Monarchy'
+                      OR gov_form LIKE '%Republic%'))
+ORDER BY inflation_rate;
 
 
 
@@ -71,18 +67,33 @@ ORDER BY inf;
 -- window
 -- 1번
 SELECT
-    rownum AS row_n
-    , year
-    , city
-    , sport
-    , discipline
-    , athlete
-FROM summer_medals;
+    ROWNUM AS row_n
+    , a.*
+FROM summer_medals a;
 
 
 -- 2번
-    
+SELECT
+    year
+    , ROW_NUMBER() OVER(ORDER BY year) AS row_n
+FROM (SELECT DISTINCT year
+      FROM summer_medals) years;
+
+
 -- 3번
+WITH mc AS (SELECT
+                athlete
+                , COUNT(*) AS medals
+            FROM summer_medals
+            GROUP BY athlete)
+SELECT
+    medals
+    , athlete
+    , ROW_NUMBER() OVER (ORDER BY Medals DESC) AS row_n
+FROM mc
+ORDER BY medals desc
+OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY;
+
 
 -- 4번
 SELECT
@@ -94,3 +105,21 @@ SELECT
     Event = '69KG' AND
     Gender = 'Men' AND
     Medal = 'Gold';
+    
+WITH search_gold AS (SELECT
+                        year,
+                        Country AS champion
+                     FROM summer_medals
+                     WHERE
+                        Discipline = 'Weightlifting' AND
+                        Event = '69KG' AND
+                        Gender = 'Men' AND
+                        Medal = 'Gold')
+SELECT
+    year
+    , champion
+    , LAG(Champion) OVER (ORDER BY year) AS last_champion
+FROM search_gold
+ORDER BY year;
+
+
